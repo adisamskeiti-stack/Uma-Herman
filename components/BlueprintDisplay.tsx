@@ -7,10 +7,35 @@ interface BlueprintDisplayProps {
   onSectionSelect: (index: number) => void;
   selectedIndex: number | null;
   isLoading: boolean;
+  isBlueprintLoading: boolean;
+  blueprintError: string | null;
 }
 
-const BlueprintDisplay = ({ sections, onSectionSelect, selectedIndex, isLoading }: BlueprintDisplayProps) => {
-  const selectedContent = selectedIndex !== null ? sections[selectedIndex].content : '';
+const BlueprintDisplay = ({ sections, onSectionSelect, selectedIndex, isLoading, isBlueprintLoading, blueprintError }: BlueprintDisplayProps) => {
+  const selectedContent = selectedIndex !== null ? sections[selectedIndex]?.content : '';
+
+  if (isBlueprintLoading) {
+    return (
+      <div className="p-6">
+        <div className="h-6 bg-slate-700 rounded w-3/4 animate-pulse mb-6"></div>
+        <div className="space-y-2">
+            <div className="h-10 bg-slate-800/60 rounded animate-pulse"></div>
+            <div className="h-10 bg-slate-800/60 rounded animate-pulse"></div>
+            <div className="h-10 bg-slate-800/60 rounded animate-pulse"></div>
+            <div className="h-10 bg-slate-800/60 rounded animate-pulse w-5/6"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (blueprintError) {
+    return (
+        <div className="m-4 p-4 text-red-300 bg-red-900/50 rounded-lg">
+            <h3 className="font-bold mb-2">Error Loading Blueprint</h3>
+            <p className="text-sm">{blueprintError}</p>
+        </div>
+    );
+  }
 
   return (
     <div className="flex flex-col h-full">
