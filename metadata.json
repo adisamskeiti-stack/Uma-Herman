@@ -1,0 +1,5 @@
+{
+  "name": "Blueprint Explainer",
+  "description": "An interactive tool that uses Gemini to explain complex technical blueprints section by section, making them easy to understand for developers and product managers.",
+  "requestFramePermissions": []
+}
